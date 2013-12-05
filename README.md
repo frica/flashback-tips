@@ -31,30 +31,29 @@ SQL> show parameter db_flashback_retention_target
 
 SQL> alter system set db_flashback_retention_target = 2880; 
 
-
-* How to delete all logs with RMAN
-
-crosscheck archivelog all;
-delete noprompt expired archivelog all;
-
 * Check restore points
 
 SQL> select NAME,SCN,GUARANTEE_FLASHBACK_DATABASE,DATABASE_INCARNATION#, time from v$restore_point ;
 
 * Delete a restore point
 
-SQL> DROP RESTORE POINT RP_19102013;
+SQL> DROP RESTORE POINT RP_DATE;
 
 * set flashback on
 
 alter database flashback on;
 
+---
+
+* How to delete all logs with RMAN
+
+rman> crosscheck archivelog all;
+rman> delete noprompt expired archivelog all;
+
 * Set up retention policy 
 
 rman> CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 7 DAYS;
 
---
+---
 
-Oracle Alert file: alert_aprod.log
-
---
+Oracle Alert file: alert_MYDBNAME.log
