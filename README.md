@@ -48,6 +48,7 @@ alter database flashback on;
 * How to delete all logs with RMAN
 
 rman> crosscheck archivelog all;
+
 rman> delete noprompt expired archivelog all;
 
 * Set up retention policy 
